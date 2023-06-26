@@ -66,7 +66,7 @@ router.get('/discord/callback', async (req, res) => {
 
     const guildMember = await guildResponse.json();
     console.log(guildMember);
-*/
+
     let User = await user.findOneAndUpdate(
       { id: profile.id },
       {
@@ -82,10 +82,10 @@ router.get('/discord/callback', async (req, res) => {
       },
       { upsert: true, new: true }
     );
+  */
+    req.session.profileId = profile.id;
 
-    req.session.profile = profile.id;
-
-    res.send(`Logged in ${profile.username}. Go Back To Discord`);
+    res.send(`Logged in ${profile.username}.`);
   } catch (error) {
     console.error('Error during authentication:', error);
     res.send(error);
